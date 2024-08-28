@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Recommendations</title>
+    <style>
+        :root {
+            --primary-color: #0056b3;
+            --secondary-color: #007bff;
+            --background-color: #f0f4f8;
+            --text-color: #333;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --input-border: #ccc;
+            --error-color: #ff4d4d;
+            --success-color: #4caf50;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+            width: 100%;
+        }
+
+        h1 {
+            margin: 20px 0;
+            font-size: 2.5em;
+            letter-spacing: 1px;
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .table-container {
+            width: 100%;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        button {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1em;
+            margin: 10px;
+        }
+
+        button:hover {
+            background-color: var(--primary-color);
+        }
+
+        .button-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .button-container a {
+            text-decoration: none;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 15px 0;
+            text-align: center;
+            font-size: 0.9em;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .success-message {
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Delete Recommendations</h1>
+    </header>
+    <main>
+        {% if success %}
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var successModal = document.getElementById('successModal');
+                if (successModal) {
+                    successModal.style.display = 'flex';
+                }
+            });
+        </script>
+        <div id="successModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p class="success-message">{{ message }}</p>
+            </div>
+        </div>
+        {% elif success == False %}
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var errorModal = document.getElementById('errorModal');
+                if (errorModal) {
+                    errorModal.style.display = 'flex';
+                }
+            });
+        </script>
+        <div id="errorModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p class="error-message">{{ message }}</p>
+            </div>
+        </div>
+        {% endif %}
+
+        <h2>Existing Recommendations</h2>
+        <form id="deleteForm" method="POST">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Select</th>
+                            <th>Gender</th>
+                            <th>Hemoglobin State</th>
+                            <th>Hematological State</th>
+                            <th>Systematic Toxicity</th>
+                            <th>Recommendation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for recommendation in recommendations %}
+                        <tr>
+                            <td><input type="checkbox" name="recommendation_ids" value="{{ recommendation._id }}"></td>
+                            <td>{{ recommendation.Gender }}</td>
+                            <td>{{ recommendation.Hemoglobin_State }}</td>
+                            <td>{{ recommendation.Hematological_State }}</td>
+                            <td>{{ recommendation.Systematic_Toxicity }}</td>
+                            <td>{{ recommendation.Recommendation }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <div class="button-container">
+                <button type="button" onclick="confirmDeletion()">Delete</button>
+            </div>
+            <input type="hidden" id="confirm_delete" name="confirm_delete">
+        </form>
+        <div class="button-container">
+            <a href="/">
+                <button type="button">Back to Home</button>
+            </a>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Medical Recommendation System. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function confirmDeletion() {
+            if (confirm('Are you sure you want to delete the selected recommendations?')) {
+                document.getElementById('confirm_delete').value = 'yes';
+            } else {
+                document.getElementById('confirm_delete').value = 'no';
+            }
+            document.getElementById('deleteForm').submit();
+        }
+
+        function closeModal() {
+            document.getElementById('successModal').style.display = 'none';
+            document.getElementById('errorModal').style.display = 'none';
+        }
+
+        document.querySelectorAll('.close').forEach(function(closeButton) {
+            closeButton.onclick = function() {
+                closeModal();
+            }
+        });
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
+
+

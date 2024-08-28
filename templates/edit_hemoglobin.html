@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Edit Hemoglobin States - Medical Recommendation System">
+    <title>Edit Hemoglobin States</title>
+    <style>
+        :root {
+            --primary-color: #0056b3;
+            --secondary-color: #007bff;
+            --background-color: #f0f4f8;
+            --text-color: #333;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --input-border: #ccc;
+            --error-color: #ff4d4d;
+            --success-color: #4caf50;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+            width: 100%;
+        }
+
+        h1 {
+            margin: 20px 0;
+            font-size: 2.5em;
+            letter-spacing: 1px;
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        form {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            width: 100%;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid var(--input-border);
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        input[type="submit"] {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+            width: 100%;
+            box-shadow: var(--shadow);
+        }
+
+        input[type="submit"]:hover,
+        input[type="submit"]:focus {
+            background-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .button-container {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .button-container a {
+            text-decoration: none;
+            display: block;
+        }
+
+        .button-container button {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+            width: 100%;
+            box-shadow: var(--shadow);
+        }
+
+        .button-container button:hover,
+        .button-container button:focus {
+            background-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .success-message {
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Edit Hemoglobin States for {{ gender }}</h1>
+    </header>
+    <main>
+        <form method="POST">
+            {% for record in records %}
+            <div>
+                <label>{{ record['value'] }}</label><br>
+                <label>Min Hemoglobin:</label>
+                <input type="text" name="min_hemoglobin" value="{{ record['min_hemoglobin'] }}"><br>
+                <label>Max Hemoglobin:</label>
+                <input type="text" name="max_hemoglobin" value="{{ record['max_hemoglobin'] }}"><br>
+            </div>
+            <br>
+            {% endfor %}
+            <input type="submit" value="Update">
+        </form>
+        <div class="button-container">
+            <a href="/">
+                <button type="button">Back to Home</button>
+            </a>
+        </div>
+    </main>
+
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p class="success-message">Update successful</p>
+        </div>
+    </div>
+
+    <div id="errorModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p class="error-message">Invalid intervals detected. Please ensure that the intervals are exclusive and there are no gaps.</p>
+        </div>
+    </div>
+
+    <script>
+        function showModal(modalId) {
+            var modal = document.getElementById(modalId);
+            modal.style.display = "block";
+
+            var span = modal.getElementsByClassName("close")[0];
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
+
+        {% if success %}
+            showModal('successModal');
+        {% elif error %}
+            showModal('errorModal');
+        {% endif %}
+    </script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retrieval Results</title>
+    <style>
+        :root {
+            --primary-color: #0056b3;
+            --secondary-color: #007bff;
+            --background-color: #f0f4f8;
+            --text-color: #333;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --card-border: #ff0000;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+            width: 100%;
+        }
+
+        h1 {
+            margin: 20px 0;
+            font-size: 2.5em;
+            letter-spacing: 1px;
+        }
+
+        .dashboard {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 40px 20px;
+            width: 100%;
+        }
+
+        .card {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 20px;
+            width: 250px;
+            text-align: center;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .card.highlight {
+            border: 3px solid var(--card-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            font-size: 1.5em;
+            color: var(--primary-color);
+        }
+
+        .card p {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        .info-link {
+            display: block;
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .button-container a {
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .button-container button {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+            box-shadow: var(--shadow);
+        }
+
+        .button-container button:hover,
+        .button-container button:focus {
+            background-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Recommendations</h1>
+    </header>
+
+    <div class="dashboard">
+        {% for result in results %}
+        <div class="card {% if result.Recommendation != 'No recommendation found' %}highlight{% endif %}">
+            <h2>{{ result.Patient_name }}</h2>
+            <p><strong>Gender:</strong> {{ result.Gender }}</p>
+            <p><strong>Hemoglobin State:</strong> {{ result.Hemoglobin_state }} <a href="https://www.clalit.co.il/he/medical/lab_tests/Pages/hgb.aspx" class="info-link" target="_blank">[Info]</a></p>
+            <p><strong>Hematological State:</strong> {{ result.Hematological_state }} <a href="https://www.clalit.co.il/he/medical/lab_tests/Pages/wbc.aspx" class="info-link" target="_blank">[Info]</a></p>
+            <p><strong>Systemic Toxicity:</strong> {{ result.Systemic_toxicity }}</p>
+            <p><strong>Recommendation:</strong> {{ result.Recommendation }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="button-container">
+        <a href="/">
+            <button>Back to Home</button>
+        </a>
+    </div>
+</body>
+
+</html>
+
+
+
+

@@ -1,0 +1,13 @@
+﻿ConceptName,Value,Output_value
+Chills,None,1
+Chills,Shaking,2
+Chills,Rigor,3
+Chills,Rigor,4
+Skin-Look,Erythema,1
+Skin-Look,Vesiculation,2
+Skin-Look,Desquamation,3
+Skin-Look,Exfoliation,4
+Allergic-state,Edema,1
+Allergic-state,Bronchospasm,2
+Allergic-state,Sever-Bronchospasm,3
+Allergic-state,Anaphylactic-Shock,4

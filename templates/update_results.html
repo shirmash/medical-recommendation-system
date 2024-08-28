@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Record Update - View updated and old medical records">
+    <title>Record Updated - Medical Recommendation System</title>
+    <style>
+        :root {
+            --primary-color: #0056b3;
+            --secondary-color: #007bff;
+            --background-color: #f0f4f8;
+            --text-color: #333;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --input-border: #ccc;
+            --table-border: #e0e0e0; /* Lighter border for better consistency */
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+            letter-spacing: 1px;
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .section {
+            width: 100%;
+            max-width: 900px; /* Ensure section doesn't stretch too wide */
+            margin-bottom: 30px; /* Space between sections */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--white);
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px; /* Space below tables */
+        }
+
+        th, td {
+            border: 1px solid var(--table-border);
+            padding: 12px;
+            text-align: left;
+            box-sizing: border-box; /* Ensure padding and border are included in the width */
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 1.8em;
+            color: var(--primary-color);
+        }
+
+        .button-container {
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .button-container a {
+            text-decoration: none;
+        }
+
+        .button-container button {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+            width: 100%;
+            box-shadow: var(--shadow);
+        }
+
+        .button-container button:hover,
+        .button-container button:focus {
+            background-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 15px 0;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            .button-container button {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Record Updated</h1>
+    </header>
+    <main>
+        <div class="section">
+            <h2>Old Record</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>LOINC Number</th>
+                        <th>Component</th>
+                        <th>Patient Name</th>
+                        <th>Transaction Time</th>
+                        <th>Valid Start Time</th>
+                        <th>Unit</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ old_result["LOINC-NUM"] }}</td>
+                        <td>{{ old_result["Component"] }}</td>
+                        <td>{{ old_result["First name"] }} {{ old_result["Last name"] }}</td>
+                        <td>{{ old_result["Transaction time"] }}</td>
+                        <td>{{ old_result["Valid start time"] }}</td>
+                        <td>{{ old_result["Unit"] }}</td>
+                        <td>{{ old_result["Value"] }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Updated Record</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>LOINC Number</th>
+                        <th>Component</th>
+                        <th>Patient Name</th>
+                        <th>Transaction Time</th>
+                        <th>Valid Start Time</th>
+                        <th>Unit</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ updated_result["LOINC-NUM"] }}</td>
+                        <td>{{ updated_result["Component"] }}</td>
+                        <td>{{ updated_result["First name"] }} {{ updated_result["Last name"] }}</td>
+                        <td>{{ updated_result["Transaction time"] }}</td>
+                        <td>{{ updated_result["Valid start time"] }}</td>
+                        <td>{{ updated_result["Unit"] }}</td>
+                        <td>{{ updated_result["Value"] }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="button-container">
+            <a href="/">
+                <button type="button">Back to Home</button>
+            </a>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Medical Recommendation System. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+
+

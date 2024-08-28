@@ -1,0 +1,19 @@
+﻿ConceptName,gender,min_hemoglobin,max_hemoglobin,min_wbc,max_wbc,value
+Hematological,Male,0,13,0,4000,Pancytopenia
+Hematological,Male,0,13,4000,10000,Anemia
+Hematological,Male,0,13,10000,20000,Suspected Leukemia
+Hematological,Male,13,16,0,4000,Leukopenia
+Hematological,Male,13,16,4000,10000,Normal
+Hematological,Male,13,16,10000,20000,Leukemoid reaction
+Hematological,Male,16,1000,0,4000,Suspected Polycytemia Vera
+Hematological,Male,16,1000,4000,10000,Polyhemia
+Hematological,Male,16,1000,10000,20000,Suspected Polycytemia Vera
+Hematological,Female,0,12,0,4000,Pancytopenia
+Hematological,Female,0,12,4000,10000,Anemia
+Hematological,Female,0,12,10000,20000,Suspected Leukemia
+Hematological,Female,12,14,0,4000,Leukopenia
+Hematological,Female,12,14,4000,10000,Normal
+Hematological,Female,12,14,10000,20000,Leukemoid reaction
+Hematological,Female,14,1000,0,4000,Suspected Polycytemia Vera
+Hematological,Female,14,1000,4000,10000,Polyhemia
+Hematological,Female,14,1000,10000,20000,Suspected Polycytemia Vera

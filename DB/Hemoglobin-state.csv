@@ -1,0 +1,11 @@
+﻿ConceptName,gender,min_hemoglobin,max_hemoglobin,value,good before,good after,granularity
+Hemoglobin,Female,0,8,Severe Anemia,36,36,hour
+Hemoglobin,Female,8,10,Moderate Anemia,36,36,hour
+Hemoglobin,Female,10,12,Mild Anemia,36,36,hour
+Hemoglobin,Female,12,14,Normal Hemoglobin,36,36,hour
+Hemoglobin,Female,14,1000,Polycytemia,36,36,hour
+Hemoglobin,Male,0,9,Severe Anemia,36,36,hour
+Hemoglobin,Male,9,11,Moderate Anemia,36,36,hour
+Hemoglobin,Male,11,13,Mild Anemia,36,36,hour
+Hemoglobin,Male,13,16,Normal Hemoglobin,36,36,hour
+Hemoglobin,Male,16,1000,Polycytemia,36,36,hour

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Set States - Medical Recommendation System">
+    <title>Set States</title>
+    <style>
+        :root {
+            --primary-color: #0056b3;
+            --secondary-color: #007bff;
+            --background-color: #f0f4f8;
+            --text-color: #333;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --button-hover: #004494;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+            width: 100%;
+        }
+
+        h1 {
+            margin: 20px 0;
+            font-size: 2.5em;
+            letter-spacing: 1px;
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .button-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            width: 100%;
+        }
+
+        button {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+            width: 100%;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        button:hover,
+        button:focus {
+            background-color: var(--button-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 15px 0;
+            text-align: center;
+            font-size: 0.9em;
+            margin-top: auto;
+            width: 100%;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            button {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Select a State to Set</h1>
+    </header>
+    <main>
+        <div class="button-container">
+            <a href="/select_gender">
+                <button>Hemoglobin</button>
+            </a>
+            <a href="/select_hematological">
+                <button>Hematological</button>
+            </a>
+            <a href="/edit_fever">
+                <button>Fever</button>
+            </a>
+            <a href="/edit_chills">
+                <button>Chills</button>
+            </a>
+            <a href="/edit_skin_look">
+                <button>Skin-Look</button>
+            </a>
+            <a href="/edit_allergic_state">
+                <button>Allergic State</button>
+            </a>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Medical Recommendation System. All rights reserved.</p>
+    </footer>
+</body>
+</html>

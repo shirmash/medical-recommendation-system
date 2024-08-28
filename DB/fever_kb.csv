@@ -1,0 +1,5 @@
+﻿ConceptName,min,max,Output_value
+Fever,0,38.5,1
+Fever,38.5,40,2
+Fever,40,10000,3
+Fever,40,10000,4

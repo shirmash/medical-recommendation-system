@@ -1,0 +1,11 @@
+Gender,Hemoglobin_State,Hematological_State,Systematic_Toxicity,Recommendation
+Male,Severe Anemia,Pancytopenia,1,Measure BP once a week
+Male,Moderate Anemia,Anemia,2,"Measure BP every 3 days, Give aspirin 5g twice a week"
+Male,Mild Anemia,Suspected Leukemia,3,"Measure BP every day, Give aspirin 15g every day, Diet consultation"
+Male,Normal Hemoglobin,Leukemoid reaction,4,"Measure BP twice a day, Give aspirin 15g every day, Exercise consultation, Diet consultation"
+Male,Polycytemia,Suspected Polycytemia Vera,4,"Measure BP every hour, Give 1 gr magnesium every hour, Exercise consultation, Call family"
+Female,Severe Anemia,Pancytopenia,1,Measure BP every 3 days
+Female,Moderate Anemia,Anemia,2,"Measure BP every 3 days, Give Celectone 2g twice a day for two days drug treatment"
+Female,Mild Anemia,Suspected Leukemia,3,"Measure BP every day, Give 1 gr magnesium every 3 hours, Diet consultation"
+Female,Normal Hemoglobin,Leukemoid reaction,4,"Measure BP twice a day, Give 1 gr magnesium every hour, Exercise consultation, Diet consultation"
+Female,Polycytemia,Suspected Polycytemia Vera,4,"Measure BP every hour, Give 1 gr magnesium every hour, Exercise consultation, Call help"

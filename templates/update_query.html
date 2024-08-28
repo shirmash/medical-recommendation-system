@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Update Medical Record - Enter patient information">
+    <title>Update Medical Record - Medical Recommendation System</title>
+    <style>
+        :root {
+            --primary-color: #0056b3;
+            --secondary-color: #007bff;
+            --background-color: #f0f4f8;
+            --text-color: #333;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --input-border: #ccc;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+            letter-spacing: 1px;
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        form {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="time"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid var(--input-border);
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        input[type="submit"],
+        .button-container button {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+            width: 100%;
+            box-shadow: var(--shadow);
+        }
+
+        input[type="submit"]:hover,
+        input[type="submit"]:focus,
+        .button-container button:hover,
+        .button-container button:focus {
+            background-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .button-container {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .button-container a {
+            text-decoration: none;
+            display: block;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 15px 0;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            form {
+                padding: 20px;
+            }
+
+            input[type="submit"],
+            .button-container button {
+                font-size: 1em;
+            }
+        }
+
+        /* New styles for the Now button and container */
+        .date-time-container {
+            display: flex;
+            align-items: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .date-time-field {
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        .date-time-field input {
+            margin-bottom: 0;
+        }
+
+        .now-button {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 12px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1em;
+            height: 43px;
+        }
+
+        .now-button:hover,
+        .now-button:focus {
+            background-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Update Medical Record</h1>
+    </header>
+    <main>
+        <form action="/update_query" method="POST">
+            <label for="loinc_num">LOINC Number:</label>
+            <input type="text" id="loinc_num" name="loinc_num">
+            
+            <label for="component">Component:</label>
+            <input type="text" id="component" name="component">
+            
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name">
+            
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name">
+            
+            <label for="update_date">Record Date:</label>
+            <input type="date" id="update_date" name="update_date">
+            
+            <label for="update_time">Record Time:</label>
+            <input type="time" id="update_time" name="update_time">
+        
+            <div class="date-time-container">
+                <div class="date-time-field">
+                    <label for="current_date">Current Date:</label>
+                    <input type="date" id="current_date" name="current_date">
+                </div>
+                <div class="date-time-field">
+                    <label for="current_time">Current Time:</label>
+                    <input type="time" id="current_time" name="current_time">
+                </div>
+                <button type="button" class="now-button" onclick="setCurrentDateTime()">Now</button>
+            </div>
+            
+            <label for="updated_value">Updated Value:</label>
+            <input type="number" id="updated_value" name="updated_value">
+            
+            <input type="submit" value="Submit">
+        </form>
+        <div class="button-container">
+            <a href="/">
+                <button type="button">Back to Home</button>
+            </a>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Medical Recommendation System. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function setCurrentDateTime() {
+            const now = new Date();
+            
+            // Set current date
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            document.getElementById('current_date').value = `${year}-${month}-${day}`;
+            
+            // Set current time
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('current_time').value = `${hours}:${minutes}`;
+        }
+    </script>
+</body>
+</html>
+
+
