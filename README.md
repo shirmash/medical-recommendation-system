@@ -31,4 +31,4 @@ This project introduces a Clinical Decision Support System (CDSS) designed to as
    python run.py
 
 ## Viewing The App
-`Go to http://127.0.0.1:5000
+Go to http://127.0.0.1:5000
