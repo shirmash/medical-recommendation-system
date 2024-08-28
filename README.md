@@ -24,7 +24,6 @@ This project introduces a Clinical Decision Support System (CDSS) designed to as
 - MongoDB server
 
 ## Setup & Installation
-Make sure you have the latest version of Python installed.
    git clone <repo-url>
    pip install -r requirements.txt
    
