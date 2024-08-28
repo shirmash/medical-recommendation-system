@@ -37,7 +37,7 @@ def set_states():
 def select_gender():
     if request.method == 'POST':
         gender = request.form['gender']
-        return redirect(url_for('edit_hemoglobin', gender=gender))
+        return redirect(url_for('states_m.edit_hemoglobin', gender=gender))
     return render_template('select_gender.html')
 
 
@@ -46,7 +46,7 @@ def select_hematological():
     if request.method == 'POST':
         gender = request.form['gender']
         variable = request.form['variable']  # Either 'hemoglobin' or 'wbc'
-        return redirect(url_for('edit_hematological', gender=gender, variable=variable))
+        return redirect(url_for('states_m.edit_hematological', gender=gender, variable=variable))
     return render_template('select_hematological.html')
 
 @main_bp.route('/recommendation_query')
