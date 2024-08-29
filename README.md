@@ -4,6 +4,10 @@
 
 This project introduces a Clinical Decision Support System (CDSS) designed to assist doctors in managing patient care and obtaining treatment recommendations. The system centralizes patient management, providing doctors with easy access to medical records, patient histories, and personalized treatment recommendations.
 
+## User Manual
+
+For detailed information on how to use the system, download the user manual [here](https://github.com/yourusername/yourrepo/raw/main/path/to/yourfile.docx).
+
 ### Key Features
 
 - **Centralized Dashboard**: Monitor all patients and receive real-time recommendations for efficient patient management.
