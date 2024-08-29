@@ -6,7 +6,7 @@ This project introduces a Clinical Decision Support System (CDSS) designed to as
 
 ## User Manual
 
-For detailed information on how to use the system, download the user manual [here](https://github.com/yourusername/yourrepo/raw/main/path/to/yourfile.docx).
+For detailed information on how to use the system, download the user manual [here](REPORT.pdf).
 
 ### Key Features
 
