@@ -10,9 +10,8 @@ For detailed information on how to use the system, download the user manual [her
 
 ### Key Features
 
-- **Centralized Dashboard**: Monitor all patients and receive real-time recommendations for efficient patient management.
 - **Search and Manage Records**: Search for specific records, view patient history, update or delete records, and track patient status over time.
-- **Personalized Recommendations**: Customize state cutoffs and recommendations as needed, ensuring a tailored approach to patient care.
+- **Personalized Recommendations**: Customize state cutoffs and real-time recommendations as needed, ensuring a tailored approach to patient care.
 - **User-Friendly Interface**: An intuitive web application for easy access to information and improved quality of patient care.
 
 ### Technologies Used
