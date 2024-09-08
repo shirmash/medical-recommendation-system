@@ -29,7 +29,6 @@ For detailed information on how to use the system, download the user manual [her
 
 ## Setup & Installation
    git clone <repo-url>
-   pip install -r requirements.txt
    
 ## Running The App
    python run.py
