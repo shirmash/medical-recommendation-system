@@ -269,7 +269,6 @@ def deletion_query_function():
 
     updated_result = copy.deepcopy(old_result)
     updated_result['Deletion time'] = current_datetime
-    updated_result["Component"] = component
 
         # Step 2: Extract IDs from the fetched records
     ids_to_update = [old_result["_id"]]

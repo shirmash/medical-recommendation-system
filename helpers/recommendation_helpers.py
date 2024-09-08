@@ -125,17 +125,33 @@ def delete_recommendation():
     return render_template('delete_recommendation.html', recommendations=recommendations)
 
 
-
 @rec_bp.route('/recommendation_query', methods=['POST'])
 def abstract_query_function():
+    """
+    This function handles the recommendation process. It receives the query date and time provided by the user and retrieves the relevant records from the database based on that time.
+    The function then evaluates the combined conditions for each patient and returns the most up-to-date recommendation for each.
+    :return: For each patient, the function returns the most recent and relevant recommendation, if available.
+    """
     query_date = request.form.get('query_date')
     query_time = request.form.get('query_time')
+    if not query_time or not query_date:
+        return render_template('not_found.html')
 
     current_datetime = datetime.strptime(f"{query_date}T{query_time}", '%Y-%m-%dT%H:%M')
     # Construct base MongoDB query with date criteria
+    # query = {
+    #     "Transaction time": {##current time needs to be after transcation time
+    #         "$lte": current_datetime}
+    # }
+    # Calculate the datetime one week before the current datetime
+    one_week_ago = current_datetime - timedelta(days=3)
+
+    # Construct MongoDB query with date range criteria
     query = {
-        "Transaction time": {##current time needs to be after transcation time
-            "$lte": current_datetime}
+        "Transaction time": {
+            "$gte": one_week_ago,
+            "$lte": current_datetime
+        }
     }
     patient_samples = {}
     results = list(patient_db.find(query))
@@ -177,14 +193,12 @@ def abstract_query_function():
                     hemoglobin_sample["Value_State"] = hemoglobin_kb_gender["value"]
                     hemoglobin_sample["Concept_Name"] = "Hemoglobin_state"
                     result_abstraction.append(hemoglobin_sample)
-
-            hemoglobin_samples.sort(key=lambda x: x['Valid start time before'])
-            hemoglobin_samples_fixed = find_conflict_intervals(hemoglobin_samples)  ##fix the conflict between two samples and merge samples with the same abstract value if needed
+            hemoglobin_samples_fixed = find_conflict_intervals(result_abstraction)  ##fix the conflict between two samples and merge samples with the same abstract value if needed
             hemoglobin_samples_fixed.sort(key=lambda x: x['Valid start time before'], reverse=True)
             if (wbc_samples is not None) and (chills_samples is not None) and (fever_samples is not None) and (skin_look_samples is not None) and (allergic_state_samples is not None):  # there is no WBC sample, so we can't evaluate the hematological state
                 for wbc_sample in wbc_samples:   ##evaluate the hematological state
                     wbc_value = wbc_sample['Value']
-                    start_wbc_sample = parse_datetime(wbc_sample['Valid start time']) - timedelta(hours=36)  ##subtract 36 hours from the wbc sample - good before  #TODO: maybe to do good before and good after for the other parameters??????
+                    start_wbc_sample = parse_datetime(wbc_sample['Valid start time']) - timedelta(hours=36)  ##subtract 36 hours from the wbc sample - good before
                     end_wbc_sample = parse_datetime(wbc_sample['Valid end time']) + timedelta(hours=36) ##add 36 hours to the wbc sample - good after
 
                     for hemoglobin_sample in hemoglobin_samples_fixed:
