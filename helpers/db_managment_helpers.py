@@ -191,7 +191,7 @@ def update_query_function():
     else:
         return render_template('not_found.html')
     updated_result = copy.deepcopy(old_result)
-    updated_result['Value'] = updated_value
+    updated_result['Value'] = int(updated_value)
     updated_result['Transaction time'] = current_datetime
     patient_db.insert_one(updated_result)##insert update to db
     ##add compunent for the output
@@ -269,17 +269,15 @@ def deletion_query_function():
 
     updated_result = copy.deepcopy(old_result)
     updated_result['Deletion time'] = current_datetime
-
+    updated_result["Component"] = component
         # Step 2: Extract IDs from the fetched records
     ids_to_update = [old_result["_id"]]
     records_to_update = list(patient_db.find({"_id": {"$in": ids_to_update}})) ## get all possible updates of the same recods
-    print(records_to_update)
     # Step 2: Create updated records
     updated_records = []
     for record in records_to_update:
         updated_record = copy.deepcopy(record)
         updated_record['Deletion time'] = current_datetime
-        updated_record["Component"] = component
         updated_records.append(updated_record)
 
     # Step 3: Delete old records
@@ -288,5 +286,4 @@ def deletion_query_function():
     # Step 4: Insert updated records
     if updated_records:
         patient_db.insert_many(updated_records)
-
     return render_template('deletion_results.html', updated_result=updated_result)
